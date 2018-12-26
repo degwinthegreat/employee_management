@@ -1,0 +1,16 @@
+- if logged_in?
+  %h1 社員一覧
+  - if current_employee.admin_flag
+    = link_to "社員追加", new_employee_path
+    
+  - @employees.each do |employee|
+    %p= employee.name
+    %p= employee.email
+    %p= employee.profile
+    = link_to "詳細", employee_path(employee.id)
+    - if current_employee.id == employee.id
+      = link_to "編集", edit_employee_path(employee.id)
+    - if current_employee.admin_flag
+      = link_to "社員情報削除", employee_path(employee.id) ,method: :delete, data: {confirm: '本当に削除しますか？'}
+- else
+  %p ログインしてください

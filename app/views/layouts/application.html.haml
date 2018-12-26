@@ -8,4 +8,13 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    - flash.each do |key, value|
+      %div{class: key}
+        #{value}
+    - notice
+    = link_to 'top', root_path
+    - if logged_in?
+      = link_to "Logout", session_path(current_employee.id), method: :delete
+    - else
+      = link_to "Login", new_session_path
     = yield

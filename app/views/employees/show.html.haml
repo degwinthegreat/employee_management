@@ -1,0 +1,10 @@
+%h1 
+  #{@employee.name}のページ
+%p
+  メールアドレス: #{@employee.email}
+
+- if current_employee.admin_flag
+  = link_to "社員追加", new_employee_path
+
+- if current_employee == @employee
+  = link_to '編集', edit_employee_path(@employee.id)
