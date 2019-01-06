@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
-    employee = Employee.find_by(email: params[:session][:email].downcase)
-    if employee && employee.authenticate(params[:session][:password])
+    employee = Employee.find_by(email: params[:session][:email])
+
+    if employee&.authenticate(params[:session][:password])
       session[:employee_id] = employee.id
       redirect_to employee_path(employee.id)
     else

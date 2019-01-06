@@ -15,8 +15,9 @@
 
   = f.label :email
   = f.email_field :email
-  - if current_employee.admin_flag
-    = f.label :admin_flag
+  
+  - if loyalty(@employee, :employees).admin?
+    = f.label :admin
     = f.check_box :employee, {}, true, false
 
   = f.label :password
@@ -26,3 +27,4 @@
   = f.password_field :password_confirmation
 
   = f.submit "Edit my account"
+  
