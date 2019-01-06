@@ -9,8 +9,12 @@ class EmployeesLoyalty < ApplicationLoyalty
     user.admin?
   end
 
+  def edit?
+    user.id == record.id
+  end
+
   def update?
-    user == @employee
+    edit?
   end
 
   def destroy?

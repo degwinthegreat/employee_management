@@ -26,5 +26,31 @@
   = f.label :password_confirmation
   = f.password_field :password_confirmation
 
+  - @employee.careers.each do |career|
+    = f.fields_for :careers, career do |p|
+      %div
+        %p 社目
+        = p.label :company_name
+        = p.text_field :company_name
+      %div
+        = p.label :join_date
+        = p.date_field :join_date, {}
+      %div
+        = p.label :turnover_date
+        = p.date_field :turnover_date, {}
+
+  - (10-@employee.careers.count).times do |times_count|
+    = f.fields_for :careers, @employee.careers.build do |p|
+      %div
+        %p #{times_count+@employee.careers.count+1}社目
+        = p.label :company_name
+        = p.text_field :company_name
+      %div
+        = p.label :join_date
+        = p.date_field :join_date, {}
+      %div
+        = p.label :turnover_date
+        = p.date_field :turnover_date, {}
+
   = f.submit "Edit my account"
   

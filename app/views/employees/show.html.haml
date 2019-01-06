@@ -3,6 +3,10 @@
 %p
   メールアドレス: #{@employee.email}
 
+- @employee.careers.each do | career |
+  %p #{career.company_name}
+  %p 入社日#{career.join_date} 〜 退職日#{career.turnover_date}
+  
 - if current_user.admin
   = link_to '社員追加', new_employee_path
 

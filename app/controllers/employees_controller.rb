@@ -27,11 +27,12 @@ class EmployeesController < ApplicationController
 
   def edit
     @employee = Employee.find(params[:id])
+    authorize! @employee
   end
 
   def update
     @employee = Employee.find(params[:id])
-    authorize!
+    authorize! @employee
 
     if @employee.update(employee_params)
       redirect_to employee_path(@employee.id), notice: "社員情報を編集しました！"
@@ -51,6 +52,6 @@ class EmployeesController < ApplicationController
   private
 
   def employee_params
-    params.require(:employee).permit(:name, :email, :profile, :password, :password_confirmation, :admin, members_attributes: [:name])
+    params.require(:employee).permit(:name, :email, :profile, :password, :password_confirmation, :admin, careers_attributes: %i[company_name join_date turnover_date])
   end
 end
