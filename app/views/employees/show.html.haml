@@ -1,0 +1,15 @@
+%h1 
+  #{@employee.name}のページ
+%p
+  メールアドレス: #{@employee.email}
+
+- @employee.careers.each do | career |
+  %p #{career.company_name}
+  %p 入社日#{career.join_date} 〜 退職日#{career.turnover_date}
+  
+- if current_user.admin
+  = link_to '社員追加', new_employee_path
+
+- if current_user == @employee
+  = link_to '編集', edit_employee_path(@employee.id)
+  
